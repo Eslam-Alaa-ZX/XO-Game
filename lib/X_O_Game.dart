@@ -170,7 +170,7 @@ setState(() {
             break;
           }
         }
-        else if(play[3]==type&&play[4]==type && play[5]==type){
+        else if(play[6]==type&&play[7]==type && play[8]==type){
           if(type=='X'){
             winner='Player 1';
             xScore++;
