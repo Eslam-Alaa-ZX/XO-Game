@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter3/PlayersName.dart';
 
 class HomeScreen extends StatelessWidget{
   static final routeName='Home';
@@ -25,7 +26,9 @@ class HomeScreen extends StatelessWidget{
                         margin: EdgeInsets.symmetric(vertical: 100,horizontal: 60),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(60))),
-                           onPressed: (){},
+                           onPressed: (){
+                            Navigator.pushNamed(context, PlayersName.routeName);
+                           },
                           child: Text('Start'),),
                       ),
                     ),

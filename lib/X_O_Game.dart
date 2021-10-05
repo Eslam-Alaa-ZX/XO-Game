@@ -4,6 +4,7 @@ import 'package:flutter3/ResetGame.dart';
 import 'X_O_Button.dart';
 
 class X_O_Game extends StatefulWidget{
+  static final String routeName='Game';
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -12,6 +13,7 @@ class X_O_Game extends StatefulWidget{
 }
 
 class X_O_GameState extends State<X_O_Game>{
+
   String player='';
   List<String> play=List.filled(9, '');
   String winner='';
@@ -20,77 +22,81 @@ class X_O_GameState extends State<X_O_Game>{
   List <Color> btnColor=List.filled(9, Colors.white);
   @override
   Widget build(BuildContext context) {
+    X_O_GameArgs argument=ModalRoute.of(context)?.settings.arguments as X_O_GameArgs;
     // TODO: implement build
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(color: Colors.grey),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ResetGame(OnClickResetGame),
-                Container(
-                  margin: EdgeInsets.all(5),
-                  child: Text('The Winner :\t $winner',
-                    style: TextStyle(color: Colors.white,fontSize: 25),),
-                ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text('Player 1 (X): $xScore  |',style: TextStyle(color: Colors.white,fontSize: 25)),
-                      Text('Player 2 (O): $oScore',style: TextStyle(color: Colors.white,fontSize: 25)),
-                    ],
+    return Scaffold(
+      appBar: AppBar(title: Text('XO Game'),),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(color: Colors.grey),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ResetGame(OnClickResetGame),
+                  Container(
+                    margin: EdgeInsets.all(5),
+                    child: Text('The Winner :\t ${TheWinnerName(argument)}',
+                      style: TextStyle(color: Colors.white,fontSize: 25),),
                   ),
-                )
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text('${argument.Player1} (X): $xScore  |',style: TextStyle(color: Colors.white,fontSize: 25)),
+                        Text('${argument.Player2} (O): $oScore',style: TextStyle(color: Colors.white,fontSize: 25)),
+                      ],
+                    ),
+                  )
 
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(color: Colors.grey),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                X_O_Button(0, OnClick),
-                X_O_Button(1, OnClick),
-                X_O_Button(2, OnClick),
-              ],
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(color: Colors.grey),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  X_O_Button(0, OnClick),
+                  X_O_Button(1, OnClick),
+                  X_O_Button(2, OnClick),
+                ],
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(color: Colors.grey),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                X_O_Button(3, OnClick),
-                X_O_Button(4, OnClick),
-                X_O_Button(5, OnClick),
-              ],
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(color: Colors.grey),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  X_O_Button(3, OnClick),
+                  X_O_Button(4, OnClick),
+                  X_O_Button(5, OnClick),
+                ],
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(color: Colors.grey),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                X_O_Button(6, OnClick),
-                X_O_Button(7, OnClick),
-                X_O_Button(8, OnClick),
-              ],
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(color: Colors.grey),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  X_O_Button(6, OnClick),
+                  X_O_Button(7, OnClick),
+                  X_O_Button(8, OnClick),
+                ],
+              ),
             ),
           ),
-        ),
 
-      ],
+        ],
+      ),
     );
   }
 
@@ -262,6 +268,17 @@ setState(() {
 
 
   }
+  String? TheWinnerName(X_O_GameArgs arg){
+    if(winner == 'Player 1'){
+      return arg.Player1;
+    }
+    else if(winner == 'Player 2'){
+      return arg.Player2;
+    }
+    else {
+      return winner;
+    }
+  }
   bool IsDrue(){
     bool isDrue=true;
     for(int i=0;i<play.length;i++){
@@ -274,3 +291,9 @@ setState(() {
   }
 }
 X_O_GameState TheGame=X_O_GameState();
+
+class X_O_GameArgs{
+  String? Player1;
+  String? Player2;
+  X_O_GameArgs({this.Player1,this.Player2});
+}
