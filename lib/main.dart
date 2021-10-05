@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget{
       title: 'My X_O Game',
       routes: {
         HomeScreen.routeName :(context){return HomeScreen();},
-        PlayersName.routeName :(context)=>PlayersName()
+        PlayersName.routeName :(context)=>PlayersName(),
+        X_O_Game.routeName :(context)=>X_O_Game()
       },
       initialRoute: HomeScreen.routeName,
     );
